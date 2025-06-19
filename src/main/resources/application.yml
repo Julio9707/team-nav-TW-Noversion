@@ -1,0 +1,76 @@
+spring:
+  profiles:
+    active: h2
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    database: h2
+  thymeleaf:
+    cache: false
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 5GB
+  security:
+    user:
+      name: admin
+      roles: admin
+      password: 123456
+    general-user-url:
+      - /api/v1/card/icons
+      - /api/v1/card/icon
+      - /api/v1/card
+      - /api/v1/upload/*
+      - /api/v1/category/tree
+      - /api/v1/app/version
+      - /api/v1/user/password
+    permit-url:
+      - /docs/**
+      - /assets/**
+      - /api/v1/card/tree
+      - /api/v1/notice
+      - /api/v1/qrcode
+      - /api/v1/attachment/*/actions/download
+      - /api/v1/setting
+      - /api/v1/quick/login
+      - /api/v1/login/user
+      - /api/v1/user/star/card
+      - /login
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+# 日志相关的配置，还有些问题，后续要改成xml的方式来配置.
+logging:
+  file:
+    name: logs/team-nav.log
+  level:
+    root: info
+    org:
+      apache: error
+      springframework: error
+
+# 线程池配置
+thread-pool:
+  core-pool-num: 2
+  max-pool-num: 2
+
+# 服务名，用于页面logo显示
+nav-name: 团队服务导航
+
+# 是否开启定时清没有使用的文件
+clear-useless-files:
+  enable: false
+  cron: 0 0 1 * * ?
+
+project:
+  remote-version-url: https://gitee.com/tuituidan/team-nav/releases/latest
+  version: @project.version@
+
+backup-sql:
+  select-table: select table_name from information_schema.tables where lower(table_schema)='team_nav'
+  select-data: select * from team_nav.{}
+  select-id: select id from team_nav.{} where id=:id
+  insert-sql: insert into team_nav.{}({}) values({});

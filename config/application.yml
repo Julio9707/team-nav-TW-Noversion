@@ -1,0 +1,13 @@
+server:
+  # 应用使用的端口
+  port: 80
+
+# 服务名，用于页面logo显示
+nav-name: Julio Service
+
+# 账号密码
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
