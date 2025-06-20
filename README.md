@@ -1,3 +1,10 @@
+此版本分支版本導向本分支，目前同步至主分支2.0.5，修改語系為繁體中文，修補主分支一些小錯誤，其他功能更新看狀況，但可以回報我錯誤有時間會修。
+
+
+
+
+
+下方為原本分支簡介懶得改引用:
 # 网站导航服务
 
 <img src="https://img.shields.io/badge/springboot-2.7.3-brightgreen" alt="springboot"/>   <img src="https://img.shields.io/badge/jdk-1.8-blue" alt="java"/>   <img src="https://img.shields.io/badge/vue-2.6.12-blueviolet" alt="vue"/>   <img src="https://img.shields.io/badge/elementui-2.15.14-brown" alt="element-ui"/>   <img src="https://img.shields.io/badge/h2database-2.1.214-yellow" alt="java"/> 
