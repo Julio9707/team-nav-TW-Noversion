@@ -38,3 +38,10 @@ database
 ext-resources
 application-local.yml
 todo.txt
+
+
+### Target ###
+/target/
+/node_modules/
+/web/node_modules/
+
