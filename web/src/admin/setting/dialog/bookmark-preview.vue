@@ -1,10 +1,10 @@
 <template>
-  <el-dialog title="浏览器书签导入预览" :visible.sync="show"
+  <el-dialog title="瀏覽器書籤導入預覽" :visible.sync="show"
              :close-on-click-modal="false"
              width="800px" append-to-body>
     <div>
       <el-alert
-        title="链接必须挂在最末端叶子节点（链接和目录不能同级），目录最多不能超过三层，请通过拖拽及删除进行调整"
+        title="連結必須掛在最末端葉子節點（連結和目錄不能同級），目錄最多不能超過三層，請透過拖曳及刪除進行調整"
         type="warning"
         :closable="false"
         show-icon>
@@ -31,14 +31,14 @@
             <span v-text="data.createTime" style="padding-right: 10px"></span>
             <el-button type="text"
                        size="small"
-                       @click="() => removeNode(node, data)">删除
+                       @click="() => removeNode(node, data)">刪除
             </el-button>
           </div>
         </div>
       </el-tree>
     </div>
     <div slot="footer" class="dialog-footer">
-      <el-button type="primary" @click="submitForm">确 定</el-button>
+      <el-button type="primary" @click="submitForm">確 定</el-button>
       <el-button @click="cancel">取 消</el-button>
     </div>
   </el-dialog>
@@ -76,7 +76,7 @@ export default {
     submitForm() {
       this.$http.post('/api/v1/category/bookmark/actions/import', this.datas)
       .then(()=>{
-        this.$modal.msgSuccess('保存成功');
+        this.$modal.msgSuccess('儲存成功');
         this.show = false;
       })
     },

@@ -147,8 +147,13 @@ public class FileExtUtils {
      * @param source source
      */
     public static void writeString(String path, String source) {
+        File file = new File(path);
+        File parent = file.getParentFile();
+        if (parent != null && !parent.exists()) {
+            parent.mkdirs();
+        }
         try {
-            FileUtils.writeStringToFile(new File(path), source, StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(file, source, StandardCharsets.UTF_8);
         } catch (IOException ex) {
             throw new IllegalArgumentException("文件存储失败", ex);
         }

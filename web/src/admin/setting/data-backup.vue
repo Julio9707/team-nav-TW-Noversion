@@ -1,33 +1,33 @@
 <template>
   <el-card>
     <div slot="header" class="card-title">
-      <span>数据导入导出</span>
+      <span>數據導入導出</span>
     </div>
     <div>
-      <el-divider content-position="left">数据备份/还原</el-divider>
+      <el-divider content-position="left">資料備份/還原</el-divider>
       <div class="backup-panel">
         <el-button type="primary"
                    class="backup-item"
                    icon="el-icon-download"
                    :loading="backupLoading"
                    size="small"
-                   @click="backupHandler">备份数据
+                   @click="backupHandler">資料備份
         </el-button>
         <file-uploader type="revert"
                        class="backup-item"
                        accept="application/zip"
                        :file-list="[]"
                        @file-change="revertUploadSuccess"
-                       :limit="1">还原备份数据
+                       :limit="1">還原資料備份
         </file-uploader>
       </div>
-      <el-divider content-position="left">浏览器书签导入</el-divider>
+      <el-divider content-position="left">瀏覽器書籤導入</el-divider>
       <div class="backup-panel">
         <file-uploader type="bookmark"
                        accept="text/html"
                        :file-list="[]"
                        @file-change="bookmarkUploadSuccess"
-                       :limit="1">上传浏览器书签
+                       :limit="1">上傳瀏覽器書籤
         </file-uploader>
       </div>
       <bookmark-preview ref="refBookmark"></bookmark-preview>
@@ -55,14 +55,14 @@ export default {
       this.backupLoading = true
       this.$download.download(`/api/v1/data/backup`)
         .then(() => {
-          this.$modal.msgSuccess('备份成功');
+          this.$modal.msgSuccess('備份成功');
         })
         .finally(() => {
           this.backupLoading = false;
         });
     },
     revertUploadSuccess() {
-      this.$modal.msgSuccess('还原成功');
+      this.$modal.msgSuccess('還原成功');
       setTimeout(() => {
         location.reload();
       }, 1000);

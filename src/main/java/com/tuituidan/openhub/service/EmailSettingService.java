@@ -92,7 +92,7 @@ public class EmailSettingService implements ApplicationRunner {
         }
         EmailSetting setting = get();
         message.setSubject(settingService.getSettingCache().getNavName());
-        Assert.hasText(setting.getUsername(), "请先在系统设置中配置邮箱");
+        Assert.hasText(setting.getUsername(), "請先在系統設定中設定郵箱");
         message.setFrom(setting.getUsername());
         javaMailSender.send(message);
     }

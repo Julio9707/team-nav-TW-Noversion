@@ -55,14 +55,14 @@ public class IconUtils {
     public static String saveBase64(String source) {
         String[] datas = StringUtils.split(source, ",");
         Matcher matcher = PATTERN.matcher(datas[0]);
-        Assert.isTrue(matcher.find(), "base64图片数据解析失败");
+        Assert.isTrue(matcher.find(), "base64圖片資料解析失敗");
         String path = buildIconSavePath(matcher.group(1));
         File saveFile = FileExtUtils.forceMkdirParent(Consts.ROOT_DIR + path);
         try {
             FileUtils.writeByteArrayToFile(saveFile, Base64.getDecoder().decode(datas[1]));
             return path;
         } catch (IOException ex) {
-            throw new ResourceWriteException("base64图标保存失败", ex);
+            throw new ResourceWriteException("base64圖示儲存失敗", ex);
         }
     }
 
@@ -79,7 +79,7 @@ public class IconUtils {
             IOUtils.copy(new URL(iconUrl), outputStream);
             return path;
         } catch (Exception ex) {
-            throw new ResourceWriteException("网络图标保存失败", ex);
+            throw new ResourceWriteException("網路圖示儲存失敗", ex);
         }
     }
 

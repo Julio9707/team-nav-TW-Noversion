@@ -38,12 +38,12 @@ public class ZipUtils {
     public static void unzip(String id, String zipPath) {
         try (ZipFile zipFile = new ZipFile(Consts.ROOT_DIR + zipPath)) {
             zipFile.setCharset(CHARSET_GBK);
-            Assert.isTrue(zipFile.isValidZipFile(), "请上传ZIP文件");
+            Assert.isTrue(zipFile.isValidZipFile(), "請上傳ZIP文件");
             List<FileHeader> fileHeaders = zipFile.getFileHeaders();
             List<String> indexPaths = fileHeaders.stream().map(FileHeader::getFileName)
                     .filter(fileName -> StringUtils.endsWith(fileName, "index.html"))
                     .collect(Collectors.toList());
-            Assert.notEmpty(indexPaths, "静态网站压缩包中缺少index.html");
+            Assert.notEmpty(indexPaths, "靜態網站壓縮包中缺少index.html");
             String[] indexPathArr = indexPaths.get(0).split("/");
             String savePath = StringExtUtils.format("{}/ext-resources/modules/{}/", Consts.ROOT_DIR, id);
             zipFile.extractAll(savePath);
@@ -56,9 +56,9 @@ public class ZipUtils {
             FileUtils.copyDirectory(new File(tempPath), new File(savePath));
             FileUtils.forceDelete(new File(savePath + indexPathArr[0]));
         } catch (ZipException ex) {
-            throw new UnzipException("静态网站解压失败", ex);
+            throw new UnzipException("靜態網站解壓縮失敗", ex);
         } catch (IOException ex) {
-            throw new UnzipException("静态网站复制失败", ex);
+            throw new UnzipException("靜態網站複製失敗", ex);
         }
     }
 
@@ -70,10 +70,10 @@ public class ZipUtils {
     public static void unzip(String zipPath) {
         try (ZipFile zipFile = new ZipFile(zipPath)) {
             zipFile.setCharset(CHARSET_GBK);
-            Assert.isTrue(zipFile.isValidZipFile(), "请上传ZIP文件");
+            Assert.isTrue(zipFile.isValidZipFile(), "請上傳ZIP文件");
             zipFile.extractAll(StringUtils.removeEndIgnoreCase(zipPath, ".zip"));
         } catch (IOException ex) {
-            throw new UnzipException("文件解压失败", ex);
+            throw new UnzipException("檔案解壓縮失敗", ex);
         }
     }
 
@@ -94,7 +94,7 @@ public class ZipUtils {
                 }
             }
         } catch (Exception ex) {
-            throw new UnzipException("文件打包异常", ex);
+            throw new UnzipException("文件打包異常", ex);
         }
     }
 

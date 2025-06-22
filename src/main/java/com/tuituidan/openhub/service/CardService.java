@@ -264,7 +264,7 @@ public class CardService {
         try {
             cardIconDto.setSrc(IconUtils.saveIcon(cardIconDto.getSrc()));
         } catch (Exception ex) {
-            log.error("card icon 保存失败", ex);
+            log.error("card icon 儲存失敗", ex);
         }
     }
 

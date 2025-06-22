@@ -172,9 +172,9 @@ public class RoleService {
      */
     public void delete(String id) {
         List<RoleCategory> categories = roleCategoryRepository.findByRoleId(id);
-        Assert.isTrue(CollectionUtils.isEmpty(categories), "该角色下存在卡片分类，不能删除");
+        Assert.isTrue(CollectionUtils.isEmpty(categories), "該角色下存在卡片分類，無法刪除");
         List<RoleUser> users = roleUserRepository.findByRoleId(id);
-        Assert.isTrue(CollectionUtils.isEmpty(users), "该角色下存在用户，不能删除");
+        Assert.isTrue(CollectionUtils.isEmpty(users), "該角色下存在用戶，無法刪除");
         roleRepository.deleteById(id);
         cacheService.getRoleCache().invalidate(id);
     }

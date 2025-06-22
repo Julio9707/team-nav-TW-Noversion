@@ -139,7 +139,7 @@ public class CommonService implements ApplicationRunner {
             try (InputStream in = file.getInputStream()) {
                 return BookmarkUtils.extractTreeData(IOUtils.toString(in, StandardCharsets.UTF_8));
             } catch (IOException ex) {
-                throw new ResourceReadException("浏览器书签解析失败", ex);
+                throw new ResourceReadException("瀏覽器書籤解析失敗", ex);
             }
         }
         String savePath = formatSavePath(type, file);
@@ -147,13 +147,13 @@ public class CommonService implements ApplicationRunner {
         try {
             FileUtils.forceMkdirParent(saveFile);
         } catch (IOException ex) {
-            throw new ResourceWriteException("父目录生成失败", ex);
+            throw new ResourceWriteException("父目錄生成失敗", ex);
         }
         try (InputStream in = file.getInputStream();
                 OutputStream out = new FileOutputStream(saveFile)) {
             IOUtils.copy(in, out);
         } catch (Exception ex) {
-            throw new ResourceWriteException("文件写入失败", ex);
+            throw new ResourceWriteException("文件寫入失敗", ex);
         }
         if (UploadTypeEnum.DEFAULT.getType().equals(type)) {
             CARD_ICONS.add(file.getOriginalFilename());
@@ -168,7 +168,7 @@ public class CommonService implements ApplicationRunner {
         String fileName = file.getOriginalFilename();
         if (UploadTypeEnum.DEFAULT.getType().equals(type)) {
             String path = CARD_ICON_PATH + fileName;
-            Assert.isTrue(!new File(Consts.ROOT_DIR + path).exists(), "文件名已经存在");
+            Assert.isTrue(!new File(Consts.ROOT_DIR + path).exists(), "檔案名稱已經存在");
             return path;
         }
         return StringExtUtils.format("/ext-resources/{}/{}/{}.{}",
@@ -189,9 +189,9 @@ public class CommonService implements ApplicationRunner {
         File oldFile = new File(root + fileName);
         String newFileName = newName + "." + FilenameUtils.getExtension(fileName);
         File newFile = new File(root + newFileName);
-        Assert.isTrue(oldFile.exists(), "原图标已不存在");
-        Assert.isTrue(!newFile.exists(), "无法修改为图标名【" + newName + "】，该图标名已存在");
-        Assert.isTrue(oldFile.renameTo(newFile), "文件名修改失败");
+        Assert.isTrue(oldFile.exists(), "原圖示已不存在");
+        Assert.isTrue(!newFile.exists(), "無法修改為圖示名【" + newName + "】，該圖示名稱已存在");
+        Assert.isTrue(oldFile.renameTo(newFile), "檔案名稱修改失敗");
         CARD_ICONS.set(CARD_ICONS.indexOf(fileName), newFileName);
         resetRefIcon(fileName, newFileName);
     }
@@ -234,8 +234,8 @@ public class CommonService implements ApplicationRunner {
                         && StringUtils.contains(item.getIcon().getSrc(), CardTypeEnum.DEFAULT.getType())
                         && StringUtils.endsWith(item.getIcon().getSrc(), fileName)
                 ).map(Card::getTitle).collect(Collectors.toList());
-        Assert.isTrue(CollectionUtils.isEmpty(list), "图标已被卡片【"
-                + StringUtils.join(list, ",") + "】使用，不能删除");
+        Assert.isTrue(CollectionUtils.isEmpty(list), "圖示已被卡片【"
+                + StringUtils.join(list, ",") + "】使用，不能刪除");
     }
 
     /**
@@ -281,7 +281,7 @@ public class CommonService implements ApplicationRunner {
             BufferedImage image = QrCodeUtils.generate(url, 200);
             ImageIO.write(image, "png", outputStream);
         } catch (Exception ex) {
-            throw new ResourceWriteException("二维码写入失败");
+            throw new ResourceWriteException("二維碼寫入失敗");
         }
     }
 

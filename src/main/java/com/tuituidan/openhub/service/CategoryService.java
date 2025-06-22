@@ -242,7 +242,7 @@ public class CategoryService {
     public void delete(String[] id) {
         List<String> ids = Arrays.asList(id);
         List<Category> children = categoryRepository.findByPidIn(ids);
-        Assert.isTrue(CollectionUtils.isEmpty(children), "要删除的分类存在子分类，不允许删除");
+        Assert.isTrue(CollectionUtils.isEmpty(children), "要刪除的分類存在子分類，不允許刪除");
         TransactionUtils.execute(() -> {
             categoryRepository.deleteAllById(ids);
             cardRepository.deleteByCategoryIn(ids);
@@ -274,7 +274,7 @@ public class CategoryService {
      * @param valid valid
      */
     public void setValid(List<String> ids, Boolean valid) {
-        Assert.isTrue(CollectionUtils.isNotEmpty(ids), "ids不能为空");
+        Assert.isTrue(CollectionUtils.isNotEmpty(ids), "ids不能為空");
         List<Category> categories = BooleanUtils.isTrue(valid)
                 ? upCascade(categoryRepository.findAllById(ids))
                 : downCascade(categoryRepository.findAllById(ids));
@@ -339,7 +339,7 @@ public class CategoryService {
         for (BookmarkVo item : datas) {
             if (UploadTypeEnum.BOOKMARK.getType().equals(item.getType())) {
                 Assert.isTrue(StringUtils.length(item.getUrl()) <= 200,
-                        "保存失败，链接【" + item.getName() + "】的地址长度超过200");
+                        "保存失敗，網頁【" + item.getName() + "】的位址長度超過200");
                 Card card = new Card();
                 card.setId(item.getId());
                 card.setAudit(true);
@@ -374,13 +374,13 @@ public class CategoryService {
     private void checkBookmarkNodes(BookmarkVo parent, List<BookmarkVo> children, int level) {
         String curCheckFold;
         if (parent != null) {
-            curCheckFold = "目录【" + parent.getFullName() + "】";
-            Assert.isTrue(parent.getLevel() < 4, curCheckFold + "层级结构已经超过三级");
+            curCheckFold = "目錄【" + parent.getFullName() + "】";
+            Assert.isTrue(parent.getLevel() < 4, curCheckFold + "層級結構已超過三級");
         } else {
-            curCheckFold = "根目录";
+            curCheckFold = "根目錄";
         }
         Assert.isTrue(children.stream().map(BookmarkVo::getType).distinct().count() <= 1,
-                curCheckFold + "下同时存在链接和目录");
+                curCheckFold + "下同時存在連結和目錄");
 
         for (BookmarkVo item : children) {
             if (parent == null) {
